@@ -5,15 +5,19 @@ const mapStore = ({ user }) => ({
   user
 });
 
-function ButtonComponent(props) {
+class ButtonComponent extends React.Component {
 
-  function clickHandler() {
-    props.onClick(clickHandler);
+  clickHandler = () => {
+    this.props.onClick();
   }
 
-  return (
-    <button type="button" onClick={clickHandler}>Increase {(props.user || {}).name} from {(props.user || {}).country}</button>
-  )
+  render() {
+    window.console.log("Rendering ButtonComponent")
+    return (
+      <button type="button" onClick={this.clickHandler}>Increase {(this.props.user || {}).name} from {(this.props.user || {}).country}</button>
+    )
+  }
+
 }
 
 export default withStore(mapStore, ButtonComponent);
