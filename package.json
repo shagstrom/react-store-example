@@ -1,7 +1,7 @@
 {
-  "name": "react-context",
+  "name": "react-store-example",
   "version": "1.0.0",
-  "description": "",
+  "description": "An example on how to use react-store",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
@@ -9,8 +9,13 @@
   },
   "author": "Simon",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shagstrom/react-store-example.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
@@ -20,7 +25,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@shagstrom/react-store": "1.0.0-RC1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   }

@@ -1,19 +1,13 @@
-export function updateUser(getDispatch) {
-  return (user) => {
-    getDispatch('user')((state) => {
-      return ({
-        ...state,
-        ...user
-      })
-    });
-  }
+export default {
 }
 
-export function updateUserCountry(getDispatch) {
-  return (country) => {
-    getDispatch('user')((state) => ({
-      ...state,
-      country
-    }));
+export function updateUserName(dispatch) {
+  return (name) => {
+    dispatch('user', (state) => {
+      return ({
+        ...state,
+        name: name,
+      });
+    });
   }
 }

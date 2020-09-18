@@ -1,48 +1,36 @@
 import React from 'react'
-import ButtonComponent from './ButtonComponent';
-import { withStore } from '../store';
-import { updateUser, updateUserCountry } from '../actions/userActions';
-import { setNumberOfBalls } from '../actions/ballActions';
+import { withStore } from '@shagstrom/react-store'
+import { updateUserName } from '../actions/userActions';
+import BannerComponent from './BannerComponent';
+import { increaseCount } from '../actions/counterActions'
 
-const mapStore = ({ ball }) => ({
-  ball
-});
+const storeProps = ({ user, counter }) => ({ user, counter });
 
 class MainComponent extends React.PureComponent {
 
-  state = {
-    numberOfTimesClicked: 0
-  }
+  // You can inject the dispatch once and for all ...
+  increaseCount = this.props.withDispatch(increaseCount);
 
-  increaseNumberOfTimesClicked = () => {
-    this.setState((state) => ({
-      numberOfTimesClicked: state.numberOfTimesClicked + 1
-    }), () => {
-      updateUser(this.props.getDispatch)({ name: `Joe ${this.state.numberOfTimesClicked}`})
-    });
-  }
-
-  updateUserCountry = (e) => {
-    updateUserCountry(this.props.getDispatch)(e.target.value);
-  }
-
-  updateNumberOfBalls = (e) => {
-    setNumberOfBalls(this.props.getDispatch)(e.target.value);
+  // ... or you can do it at every invocation
+  updateUserName = (e) => {
+    const { withDispatch } = this.props;
+    withDispatch(updateUserName)(e.target.value);
   }
 
   render() {
-    window.console.log("Rendering MainComponent")
+    const { user, counter } = this.props;
     return (
       <div>
-        <p>Number of times clicked: {this.state.numberOfTimesClicked}</p>
-        <p><input onChange={this.updateUserCountry}/></p>
-        <p><ButtonComponent onClick={this.increaseNumberOfTimesClicked} /></p>
-        <p><input onChange={this.updateNumberOfBalls} /></p>
-        <p>Number of balls: {(this.props.ball || {}).number}</p>
+        <BannerComponent />
+        <p><input onChange={this.updateUserName} /></p>
+        <p>User name: {user.name}</p>
+        <p>
+          Count: {counter.count} <button type="button" onClick={this.increaseCount}>Increase count</button>
+        </p>
       </div>
     )
   }
 
 }
 
-export default withStore(mapStore, MainComponent);
+export default withStore(storeProps, MainComponent);

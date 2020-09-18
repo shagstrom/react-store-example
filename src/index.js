@@ -1,11 +1,13 @@
+import { Store } from '@shagstrom/react-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import initialUser from './actions/userActions';
 import MainComponent from './components/MainComponent';
-import { StoreProvider } from './store';
+import initialCounter from './actions/counterActions'
 
 ReactDOM.render(
-  <StoreProvider>
+  <Store user={initialUser} counter={initialCounter}>
     <MainComponent />
-  </StoreProvider>,
+  </Store>,
   document.getElementById('app')
 );
